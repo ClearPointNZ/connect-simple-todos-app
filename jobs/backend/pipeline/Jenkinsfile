@@ -1,0 +1,64 @@
+node("jjb") {
+  def app
+
+  stage('Clone repository') {
+    checkout([
+      $class: 'GitSCM',
+      branches: [[name: '*/master']],
+      doGenerateSubmoduleConfigurations: false,
+      extensions: [],
+      submoduleCfg: [],
+      userRemoteConfigs: [[
+        credentialsId: '088d3940-55c4-4d8c-85c5-007886b9555c',
+        url: 'git@github.com:ClearPointNZ/connect-simple-todos-app.git'
+      ]]
+    ])
+  }
+
+  stage('Build backend') {
+    sh '''
+      cd swagger-backend;
+      yarn install;
+      yarn generate-api-interface;
+      yarn compile;
+    '''
+  }
+
+  stage('Build image') {
+    sh '''
+      cp jobs/backend/pipeline/Dockerfile ./Dockerfile;
+    '''
+    app = docker.build('docker-registry.connect.cd/simple-app/simple-backend')
+  }
+
+  stage('Test image') {
+    app.withRun {
+      echo 'This is a test!'
+    }
+  }
+
+  stage('Push image') {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                            credentialsId: 'registry-creds',
+                            usernameVariable: 'DOCKER_USER',
+                            passwordVariable: 'DOCKER_PASSWORD']]) {
+      sh '''
+        docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD;
+        docker push docker-registry.connect.cd/simple-app/simple-backend;
+      '''
+    }
+  }
+
+  stage('Deploy') {
+    sh '''
+      kubectl apply -f jobs/backend/pipeline/backend.yml;
+      kubectl apply -f jobs/backend/pipeline/service.yml;
+    '''
+  }
+
+  stage('Clean existing image') {
+    sh '''
+      docker rmi docker-registry.connect.cd/simple-app/simple-backend
+    '''
+  }
+}

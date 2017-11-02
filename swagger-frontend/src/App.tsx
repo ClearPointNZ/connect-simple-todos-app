@@ -2,7 +2,7 @@ import * as React from 'react';
 import TodoApi, { Todo } from './generated-api';
 import './App.css';
 
-const todoApi = new TodoApi('http://localhost:3001');
+const todoApi = new TodoApi('http://simple-app-api.connect.cd:3001');
 
 class App extends React.Component<{}, { todos: Array<Todo> }> {
   private titleInput: HTMLInputElement;

@@ -2,7 +2,7 @@
     name: meta-job-repo
     scm:
       - git:
-          url: git@github.com:ikhripunov/connect-simple-todos-app.git
+          url: git@github.com:ClearPointNZ/connect-simple-todos-app.git
           branches:
             - origin/master
           credentials-id: 088d3940-55c4-4d8c-85c5-007886b9555c
@@ -19,8 +19,7 @@
       - pollscm: "*/5 * * * *"
     builders:
       - dsl:
-          script-text:
-            !include-raw job.dsl
+          target: "jobs/meta/job.groovy"
     wrappers:
       - credentials-binding:
         - username-password-separated:
