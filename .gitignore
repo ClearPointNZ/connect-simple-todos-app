@@ -3,3 +3,9 @@ build/
 dist/
 **/**/generated-*.ts
 **/.idea/
+/swagger-api-tests/package-lock.json
+/swagger-api-tests/yarn.lock
+/swagger-api-tests/src/test/generated-api.js
+/swagger-api-tests/src/test/generated-api.js.map
+/swagger-ui-tests/yarn.lock
+/swagger-ui-tests/package-lock.json

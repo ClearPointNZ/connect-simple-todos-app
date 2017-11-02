@@ -1,7 +1,7 @@
 {
-  "name": "cucumber-js-webdriver-example",
-  "version": "1.0.0",
-  "description": "A starter for acceptance testing using cucumber-js and webdriver-js.",
+  "name": "Swagger-ui-tests",
+  "version": "0.1.0",
+  "description": "Acceptance testing using cucumber-js and webdriver-js.",
   "scripts": {
     "cucumber": "node cucumber.js"
   },

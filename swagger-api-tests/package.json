@@ -1,5 +1,5 @@
 {
-  "name": "swagger-todos-backend",
+  "name": "swagger-todos-api-tests",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/ClearPointNZ/connect-simple-todos-app.git",
