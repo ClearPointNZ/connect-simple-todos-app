@@ -14,7 +14,7 @@ const buildChromeDriver = function() {
 
  this.waitForElement = function(locator : Locator) : WebElementPromise {
     let driver = this.driver;
-    this.driver.wait(until.elementIsVisible(this.driver.findElement(locator)),10000);
+    this.driver.wait(until.elementsLocated(this.driver.findElement(locator)),10000);
     this.driver.wait(until.elementIsVisible(this.driver.findElement(locator)),10000);
     return this.driver.findElement(locator);
 };
