@@ -2,6 +2,8 @@
 import {defineSupportCode} from "cucumber";
 import {expect} from "chai";
 import {Locator, until, WebElement, WebElementPromise} from "selenium-webdriver";
+let self = this;
+let todoUiPages = require('../page_objects/todo_ui_pages');
 
 const By = require('selenium-webdriver').By;
 
@@ -11,36 +13,31 @@ let deleteButton: WebElement = By.xpath("//button[text()='Delete']");
 
 defineSupportCode(function ({Given, When, Then}) {
 
+    let todoUiPageObject = new todoUiPages();
+
     When(/^I launch the simple todo app$/, async function () {
 
-        this.driver.get(tsconfig.compilerOptions.baseUrl);
+        await this.driver.get(tsconfig.compilerOptions.baseUrl);
 
     });
 
     Given(/^I add a new (.*)$/, async function (task) {
 
         let self = this;
-        await self.driver.wait(until.elementsLocated(By.css('input')));
-        await self.driver.findElement(By.css('input')).sendKeys(task).then(async () => {
-            await self.driver.findElement(By.css('button[type="submit"]')).click().then(async () => {
-                console.log("new task added");
+
+        await todoUiPageObject.addTasks(self, task);
 
             });
 
-        });
-
-    });
-
     Then(/^I should see a newly added (.*) in the simple todo app page$/, async function (task) {
 
-        await this.driver.findElement(By.css('li.qa-main')).getText().then(async (list) => {
+        let todoUiPageObject = new todoUiPages();
+        let list : string = await todoUiPageObject.getRowText(this);
+        console.log(list);
+        expect(list).to.equal(task)
 
-            expect(list).to.contain(task);
+        });
 
-            console.log('My list contains ' + list);
-        })
-
-    });
 
     Given(/^I delete the above created task$/, async function () {
 

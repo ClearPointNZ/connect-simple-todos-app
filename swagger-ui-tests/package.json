@@ -12,6 +12,8 @@
     "@types/selenium-webdriver": "^3.0.3",
     "axios": "^0.16.1",
     "chai": "^3.5.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-things": "^0.2.0",
     "chromedriver": "2.29.0",
     "cucumber": "2.3.0",
     "cucumberjs2-nice-junit": "1.0.3",
