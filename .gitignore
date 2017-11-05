@@ -1,9 +1,8 @@
+/.idea/
 node_modules/
 build/
 dist/
 **/**/generated-*.ts
-/.idea/
-
 # User-specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml
@@ -54,3 +53,9 @@ fabric.properties
 /swagger-backend/app/app.js.map
 /swagger-backend/app/generated-interface.js
 /swagger-backend/app/generated-interface.js.map
+/swagger-api-tests/package-lock.json
+/swagger-api-tests/yarn.lock
+/swagger-api-tests/src/test/generated-api.js
+/swagger-api-tests/src/test/generated-api.js.map
+/swagger-ui-tests/yarn.lock
+/swagger-ui-tests/package-lock.json

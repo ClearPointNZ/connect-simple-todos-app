@@ -1,0 +1,33 @@
+{
+  "name": "swagger-todos-api-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ClearPointNZ/connect-simple-todos-app.git",
+  "author": "fyodor <fedor.jj@gmail.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "compile": "node_modules/.bin/tsc",
+    "generate-api-client": "node scripts/generate-api.js",
+    "start": "yarn compile && node ../swagger-backend/app/app.js",
+    "test": "yarn compile && node_modules/cucumber/bin/cucumber.js src/test/features/todoApi.feature"
+  },
+  "dependencies": {
+    "@types/restify": "^5.0.5",
+    "@types/restify-cors-middleware": "^1.0.0",
+    "assert": "^1.4.1",
+    "axios": "^0.16.2",
+    "chai": "^4.1.2",
+    "cucumber": "^3.0.6",
+    "require": "^2.4.20",
+    "restify": "^5.2.0",
+    "restify-cors-middleware": "^1.0.1",
+    "restler": "^3.4.0",
+    "swagger-typescript-codegen": "^1.2.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.5.3",
+    "@types/selenium-webdriver": "^3.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.47"
+  }
+}

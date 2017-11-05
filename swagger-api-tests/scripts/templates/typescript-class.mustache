@@ -1,0 +1,59 @@
+{{#imports}}
+/// <reference path="{{&.}}" />
+{{/imports}}
+/* tslint:disable:no-string-literal */
+/* tslint:disable:member-ordering */
+/* tslint:disable:quotemark */
+/* tslint:disable:typedef-whitespace */
+
+import Axios from 'axios';
+
+type CallbackHandler = (err: any, res?: any) => void;
+{{#definitions}}
+export type {{&name}} = {{#tsType}}{{> type}}{{/tsType}};
+{{/definitions}}
+
+type Logger = { log: (line: string) => any };
+
+export default class {{&className}} {
+
+    private domain: string = '{{&domain}}';
+
+    private globalHeaders = {};
+
+    constructor(domain?: string, private logger?: Logger) {
+        if(domain) {
+            this.domain = domain;
+        }
+        {{#methods}}
+        this.{{&methodName}} = this.{{&methodName}}.bind(this);
+        {{/methods}}
+    }
+
+    private request(method: string, url: string, body: any, headers: any, queryParameters: any, form: any, reject: CallbackHandler, resolve: CallbackHandler) {
+        if(this.logger) {
+          this.logger.log(`Call ${method} ${url}`);
+        }
+
+        Object.keys(this.globalHeaders).forEach(key => {
+          headers[key] = this.globalHeaders[key];
+        });
+
+        return Axios({
+            method,
+            url,
+            params: queryParameters,
+            data: body,
+            headers: headers
+        }).then((response) => {
+            resolve(response.data);
+        }).catch((error) => {
+            reject(error);
+        });
+    }
+
+{{#methods}}
+    {{> method}}
+
+{{/methods}}
+}
