@@ -3,8 +3,10 @@ import {defineSupportCode} from "cucumber";
 import {expect} from "chai";
 import {Locator, promise, until, WebElement, WebElementPromise} from "selenium-webdriver";
 import {todoUiPagesPageObjects} from "../page_objects/todo_ui_pages";
+
 let todoUiPages = require('../page_objects/todo_ui_pages');
 const By = require('selenium-webdriver').By;
+let todoUiPageObject = new todoUiPages();
 
 const tsconfig = require("../../../swagger-ui-tests/tsconfig.json");
 
@@ -20,22 +22,18 @@ defineSupportCode(function ({Given, When, Then}) {
 
     Given(/^I add a new (.*)$/, async function (task) {
 
-        let todoUiPageObject = new todoUiPages();
-
-        todoUiPageObject.addTasks(this,task)
+        todoUiPageObject.addTasks(this, task)
 
     });
 
     Then(/^I should see a newly added (.*) in the simple todo app page$/, async function (task) {
 
-        let todoUiPageObject = new todoUiPages();
-
-        let list : string = todoUiPageObject.getRowText(this);
-
+        let list: string = await todoUiPageObject.getRowText(this);
+        let text = list.toString();
         console.log('My list contains ' + list);
-            expect(list).to.contain(task);
+        expect(text).to.contains(task);
 
-        })
+    });
 
     Given(/^I delete the above created task$/, async function () {
 
