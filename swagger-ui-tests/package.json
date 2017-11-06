@@ -1,0 +1,29 @@
+{
+  "name": "Swagger-ui-tests",
+  "version": "0.1.0",
+  "description": "Acceptance testing using cucumber-js and webdriver-js.",
+  "scripts": {
+    "cucumber": "node cucumber.js"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/colors": "^1.1.3",
+    "@types/node": "^7.0.18",
+    "@types/selenium-webdriver": "^3.0.3",
+    "axios": "^0.16.1",
+    "chai": "^3.5.0",
+    "chromedriver": "2.29.0",
+    "cucumber": "2.3.0",
+    "cucumberjs2-nice-junit": "1.0.3",
+    "js-yaml": "^3.8.4",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.18.1",
+    "node-uuid": "^1.4.8",
+    "path": "^0.12.7",
+    "sanitize-filename": "^1.6.1",
+    "selenium-webdriver": "3.4.0",
+    "ts-node": "2.0.0",
+    "typescript": "2.1.5",
+    "yargs": "^8.0.1"
+  }
+}
