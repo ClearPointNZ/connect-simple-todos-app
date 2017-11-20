@@ -64,16 +64,16 @@ class App extends React.Component<{}, { todos: Array<Todo> }> {
         <ul>
           {this.state.todos.map((todo, index) => {
             return (
-              <li
+              <li className='qa-main'
                 key={index}
                 style={{
                   textDecoration: todo.resolved ? 'line-through' : 'none',
                 }}
               >
                 {!todo.resolved && (
-                  <button onClick={() => this.doneToDo(todo.id)}>Done</button>
+                  <button onClick={() => this.doneToDo(todo.id)} className='qa-done-button'>Done</button>
                 )}
-                <button onClick={() => this.removeToDo(todo.id)}>
+                <button onClick={() => this.removeToDo(todo.id)} className='qa-delete-button'>
                   Delete
                 </button>{' '}
                 {todo.title}
